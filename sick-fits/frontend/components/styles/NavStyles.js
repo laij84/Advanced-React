@@ -8,8 +8,12 @@ const NavStyles = styled.ul`
   font-size: 2rem;
   list-style: none;
   
+  li {
+    position: relative;
+  }
   a,
   button {
+    height: 100%;
     padding: 1rem 3rem;
     display: flex;
     align-items: center;
@@ -17,6 +21,8 @@ const NavStyles = styled.ul`
     text-transform: uppercase;
     font-weight: 900;
     font-size: 1em;
+    font-family: 'radnika_next';
+    line-height: 2;
     background: none;
     border: 0;
     cursor: pointer;

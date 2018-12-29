@@ -7,11 +7,21 @@ const Table = styled.table`
   thead {
     font-size: 10px;
   }
+  th {
+    padding: 10px 5px;
+  }
+
+  td {
+    label {
+      padding: 10px 5px;
+      display: block;
+    }
+  }
+
   td,
   th {
     border-bottom: 1px solid ${props => props.theme.offWhite};
     border-right: 1px solid ${props => props.theme.offWhite};
-    padding: 10px 5px;
     position: relative;
     &:last-child {
       border-right: none;
