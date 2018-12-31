@@ -26,6 +26,40 @@ const Query = {
 
         // if true, query all users
         return context.db.query.users({}, info);
+    },
+
+    async order(parent, args, context, info) {
+        // check user
+        const { userId } = context.request;
+        if(!userId) throw new Error("You must be signed in to view this order");
+
+        const order = await context.db.query.order({
+            where: { id: args.id }
+        }, info);
+
+        // check if user owns this order
+        const ownsOrder = order.user.id === userId;
+        const hasPermission = context.request.user.permissions.includes('ADMIN');
+
+        if(!ownsOrder || !hasPermission) {
+            throw new Error("You can't see this order");
+        }
+
+        // return order
+        return order;
+
+    },
+
+    async orders(parent, args, context, info) {
+        // check user
+        const { userId } = context.request;
+        if(!userId) throw new Error("You must be signed in to view orders");
+
+        return context.db.query.orders({
+            where: {
+                user: { id: userId }
+            }
+        }, info);
     }
 };
 
